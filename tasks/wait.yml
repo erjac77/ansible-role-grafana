@@ -1,0 +1,10 @@
+---
+
+- name: Wait for Grafana to start up
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/"
+    status_code: 200
+  register: grafana_startup_resp
+  until: (grafana_startup_resp is defined) and (grafana_startup_resp.status == 200)
+  retries: "{{ grafana_connection_retries }}"
+  delay: "{{ grafana_connection_delay }}"

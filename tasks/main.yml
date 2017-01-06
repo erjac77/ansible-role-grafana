@@ -1,0 +1,9 @@
+---
+
+- name: Gather platform specific variables
+  include_vars: "{{ grafana_platform }}.yml"
+
+- include: "{{ grafana_platform }}/setup.yml"
+- include: users.yml
+- include: datasources.yml
+#- include: dashboards.yml

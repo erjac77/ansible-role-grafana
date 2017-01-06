@@ -1,0 +1,14 @@
+{
+    "name": "{{ ds_item.name }}",
+    "type": "{{ ds_item.type }}",
+    "access": "{{ ds_item.access }}",
+    "url": "{{ ds_item.url }}"{% if ds_item.org_id is defined %},
+    "orgId": {{ ds_item.org_id }}{% endif %}{% if ds_item.pass is defined %},
+    "password": "{{ ds_item.pass }}"{% endif %}{% if ds_item.user is defined %},
+    "user": "{{ ds_item.user }}"{% endif %}{% if ds_item.db is defined %},
+    "database": "{{ ds_item.db }}"{% endif %},
+    "basicAuth": {{ ds_item.basic_auth }}{% if ds_item.basic_auth_user is defined %},
+    "basicAuthUser": "{{ ds_item.basic_auth_user }}"{% endif %}{% if ds_item.basic_auth_pass is defined %},
+    "basicAuthPassword": "{{ ds_item.basic_auth_pass }}"{% endif %}{% if ds_item.is_default is defined %},
+    "isDefault": {{ ds_item.is_default }}{% endif %}
+}

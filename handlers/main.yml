@@ -1,0 +1,15 @@
+---
+
+- name: Restart Grafana container
+  docker_container:
+    name: "{{ grafana_container_name }}"
+    image: "{{ grafana_container_image }}"
+    state: started
+    restart: yes
+    published_ports:
+      - "{{ grafana_config_server.http_port }}:{{ grafana_container_port }}"
+    volumes:
+      - "{{ grafana_container_data_volume }}:{{ grafana_config_paths.data if grafana_config_paths is defined else '/var/lib/grafana' }}"
+      - "{{ grafana_container_data_volume }}:{{ grafana_config_paths.logs if grafana_config_paths is defined else '/var/log/grafana' }}"
+      - "{{ grafana_container_data_volume }}:/etc/grafana"
+  register: grafana_container_result

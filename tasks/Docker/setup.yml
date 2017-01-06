@@ -1,0 +1,38 @@
+---
+
+- name: Check if Grafana data volume exists
+  command: "docker volume inspect {{ grafana_container_data_volume }}"
+  register: grafana_volume_inspect_output
+  ignore_errors: yes
+  changed_when: false
+
+- name: If not, create it
+  command: "docker volume create --name {{ grafana_container_data_volume }}"
+  when: grafana_volume_inspect_output|failed
+
+- name: Create Grafana container
+  docker_container:
+    name: "{{ grafana_container_name }}"
+    image: "{{ grafana_container_image }}"
+    published_ports:
+      - "{{ grafana_config_server.http_port }}:{{ grafana_container_port }}"
+    volumes:
+      - "{{ grafana_container_data_volume }}:{{ grafana_config_paths.data if grafana_config_paths is defined else '/var/lib/grafana' }}"
+      - "{{ grafana_container_data_volume }}:{{ grafana_config_paths.logs if grafana_config_paths is defined else '/var/log/grafana' }}"
+      - "{{ grafana_container_data_volume }}:/etc/grafana"
+  register: grafana_container_result
+
+- name: Generate Grafana configuration file
+  template:
+    src: grafana.ini.j2
+    dest: /tmp/grafana.ini
+  changed_when: false
+
+- name: Copy Grafana configuration file
+  shell: "docker cp /tmp/grafana.ini {{ grafana_container_name }}:/etc/grafana/grafana.ini"
+  notify: Restart Grafana container
+
+- name: Trigger handlers immediately
+  meta: flush_handlers
+
+- include: ./../wait.yml

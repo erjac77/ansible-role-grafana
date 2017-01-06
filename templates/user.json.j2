@@ -1,0 +1,7 @@
+{
+    "login": "{{ user_item.username }}"{% if user_item.fullname is defined %},
+    "name": "{{ user_item.fullname }}"{% endif %}{% if user_item.email is defined %},
+    "email": "{{ user_item.email }}"{% endif %}{% if user_item.password is defined %},
+    "password": "{{ user_item.password }}"{% endif %}{% if user_item.admin is defined %},
+    "isAdmin": {{ user_item.admin }}{% endif %}
+}

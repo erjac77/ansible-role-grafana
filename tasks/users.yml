@@ -1,0 +1,16 @@
+---
+
+- name: Get users
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/users"
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+  register: grafana_get_users_resp
+
+- name: Create users
+  include: user.yml
+  with_items: "{{ grafana_users }}"
+  loop_control:
+    loop_var: user_item

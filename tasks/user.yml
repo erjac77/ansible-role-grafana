@@ -1,0 +1,37 @@
+---
+
+- name: Get Id for user {{ user_item.username }}
+  set_fact:
+    users: "{{ grafana_get_users_resp.json|selectattr('login', 'equalto', user_item.username )|map(attribute='id')|list }}"
+
+- name: Create user {{ user_item.username }}
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/admin/users"
+    method: POST
+    HEADER_Content-Type: application/json
+    body: "{{ lookup('template', 'templates/user.json.j2') }}"
+    body_format: json
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+  register: grafana_create_user_resp
+  #when: user_item.username not in grafana_get_users_resp.json|map(attribute='login')|list
+  when: "{{ users[0] is not defined }}"
+  changed_when: grafana_create_user_resp.status == 200
+
+- name: Update user {{ user_item.username }}
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/users/{{ users[0] }}"
+    method: PUT
+    HEADER_Content-Type: application/json
+    body: "{{ lookup('template', 'templates/user.json.j2') }}"
+    body_format: json
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+  register: grafana_update_user_resp
+  #when: user_item.username in grafana_get_users_resp.json|map(attribute='login')|list
+  when: "{{ users[0] is defined }}"
+  changed_when: grafana_update_user_resp.status == 200

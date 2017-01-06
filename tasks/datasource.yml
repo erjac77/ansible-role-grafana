@@ -1,0 +1,40 @@
+---
+
+- name: Get id for datasource {{ ds_item.name }}
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/datasources/id/{{ ds_item.name }}"
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: [200, 404]
+  register: grafana_get_ds_id_resp
+
+- name: Create datasource {{ ds_item.name }}
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/datasources"
+    method: POST
+    HEADER_Content-Type: application/json
+    body: "{{ lookup('template', 'templates/datasource.json.j2') }}"
+    body_format: json
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+  register: grafana_create_ds_resp
+  when: grafana_get_ds_id_resp.status == 404
+  changed_when: grafana_create_ds_resp.status == 200
+
+- name: Update datasource {{ ds_item.name }}
+  uri:
+    url: "http://{{ grafana_config_server.domain }}:{{ grafana_config_server.http_port }}/api/datasources/{{ grafana_get_ds_id_resp.json.id }}"
+    method: PUT
+    HEADER_Content-Type: application/json
+    body: "{{ lookup('template', 'templates/datasource.json.j2') }}"
+    body_format: json
+    user: "{{ grafana_config_security.admin_user }}"
+    password: "{{ grafana_config_security.admin_password }}"
+    force_basic_auth: yes
+    status_code: 200
+  register: grafana_update_ds_resp
+  when: grafana_get_ds_id_resp.status == 200
+  changed_when: grafana_update_ds_resp.status == 200

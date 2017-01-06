@@ -1,0 +1,7 @@
+---
+
+# Grafana Docker container settings
+grafana_container_name: grafana
+grafana_container_image: grafana/grafana
+grafana_container_port: 3000
+grafana_container_data_volume: grafana-data

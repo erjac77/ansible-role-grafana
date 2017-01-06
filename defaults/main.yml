@@ -1,0 +1,31 @@
+---
+
+# Grafana host platform
+grafana_platform: Docker
+#grafana_platform: "{{ ansible_os_family }}"
+
+# Grafana connection timeout settings
+grafana_connection_retries: 60
+grafana_connection_delay: 5
+
+########## Grafana configuration parameters ##########
+grafana_config:
+  instance_name: "{{ grafana_config_server.domain }}"
+
+# Server
+grafana_config_server:
+  http_port: 3000
+  domain: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+
+# Security
+grafana_config_security:
+  admin_user: grafana
+  admin_password: grafana
+#########/ Grafana configuration parameters ##########
+
+# Grafana users
+grafana_users:
+  - { username: "{{ grafana_config_security.admin_user }}", fullname: Grafana Administrator, email: 'grafana.admin@grafana.io' }
+
+# Grafana datasources
+grafana_datasources: []

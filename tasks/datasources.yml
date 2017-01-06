@@ -1,0 +1,7 @@
+---
+
+- name: Create datasources
+  include: datasource.yml
+  with_items: "{{ grafana_datasources }}"
+  loop_control:
+    loop_var: ds_item

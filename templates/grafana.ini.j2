@@ -1,0 +1,253 @@
+############################ Grafana Configuration ############################
+{% if grafana_config is defined %}
+{% for key in grafana_config %}
+{{ key }} = {{ grafana_config[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Paths ####################################
+[paths]
+{% if grafana_config_paths is defined %}
+{% for key in grafana_config_paths %}
+{{ key }} = {{ grafana_config_paths[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Server ###################################
+[server]
+{% if grafana_config_server is defined %}
+{% for key in grafana_config_server %}
+{{ key }} = {{ grafana_config_server[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Database #################################
+[database]
+{% if grafana_config_database is defined %}
+{% for key in grafana_config_database %}
+{{ key }} = {{ grafana_config_database[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Session ##################################
+[session]
+{% if grafana_config_session is defined %}
+{% for key in grafana_config_session %}
+{{ key }} = {{ grafana_config_session[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Analytics ################################
+[analytics]
+{% if grafana_config_analytics is defined %}
+{% for key in grafana_config_analytics %}
+{{ key }} = {{ grafana_config_analytics[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Security #################################
+[security]
+{% if grafana_config_security is defined %}
+{% for key in grafana_config_security %}
+{{ key }} = {{ grafana_config_security[key] }}
+{% endfor %}
+{% endif %}
+
+[snapshots]
+{% if grafana_config_snapshots is defined %}
+{% for key in grafana_config_snapshots %}
+{{ key }} = {{ grafana_config_snapshots[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Users ####################################
+[users]
+{% if grafana_config_users is defined %}
+{% for key in grafana_config_users %}
+{{ key }} = {{ grafana_config_users[key] }}
+{% endfor %}
+{% endif %}
+
+[auth]
+{% if grafana_config_auth is defined %}
+{% for key in grafana_config_auth %}
+{{ key }} = {{ grafana_config_auth[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Anonymous Auth ###########################
+[auth.anonymous]
+{% if grafana_config_auth_anonymous is defined %}
+{% for key in grafana_config_auth_anonymous %}
+{{ key }} = {{ grafana_config_auth_anonymous[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Github Auth ##############################
+[auth.github]
+{% if grafana_config_auth_github is defined %}
+{% for key in grafana_config_auth_github %}
+{{ key }} = {{ grafana_config_auth_github[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Google Auth ##############################
+[auth.google]
+{% if grafana_config_auth_google is defined %}
+{% for key in grafana_config_auth_google %}
+{{ key }} = {{ grafana_config_auth_google[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Generic OAuth ############################
+[auth.generic_oauth]
+{% if grafana_config_auth_generic_oauth is defined %}
+{% for key in grafana_config_auth_generic_oauth %}
+{{ key }} = {{ grafana_config_auth_generic_oauth[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Grafana.net Auth #########################
+[auth.grafananet]
+{% if grafana_config_auth_grafananet is defined %}
+{% for key in grafana_config_auth_grafananet %}
+{{ key }} = {{ grafana_config_auth_grafananet[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Auth Proxy ###############################
+[auth.proxy]
+{% if grafana_config_auth_proxy is defined %}
+{% for key in grafana_config_auth_proxy %}
+{{ key }} = {{ grafana_config_auth_proxy[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Basic Auth ###############################
+[auth.basic]
+{% if grafana_config_auth_basic is defined %}
+{% for key in grafana_config_auth_basic %}
+{{ key }} = {{ grafana_config_auth_basic[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Auth LDAP ################################
+[auth.ldap]
+{% if grafana_config_auth_ldap is defined %}
+{% for key in grafana_config_auth_ldap %}
+{{ key }} = {{ grafana_config_auth_ldap[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### SMTP / Emailing ##########################
+[smtp]
+{% if grafana_config_smtp is defined %}
+{% for key in grafana_config_smtp %}
+{{ key }} = {{ grafana_config_smtp[key] }}
+{% endfor %}
+{% endif %}
+
+[emails]
+{% if grafana_config_emails is defined %}
+{% for key in grafana_config_emails %}
+{{ key }} = {{ grafana_config_emails[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Logging ##################################
+[log]
+{% if grafana_config_log is defined %}
+{% for key in grafana_config_log %}
+{{ key }} = {{ grafana_config_log[key] }}
+{% endfor %}
+{% endif %}
+
+[log.console]
+{% if grafana_config_log_console is defined %}
+{% for key in grafana_config_log_console %}
+{{ key }} = {{ grafana_config_log_console[key] }}
+{% endfor %}
+{% endif %}
+
+[log.file]
+{% if grafana_config_log_file is defined %}
+{% for key in grafana_config_log_file %}
+{{ key }} = {{ grafana_config_log_file[key] }}
+{% endfor %}
+{% endif %}
+
+[log.syslog]
+{% if grafana_config_log_syslog is defined %}
+{% for key in grafana_config_log_syslog %}
+{{ key }} = {{ grafana_config_log_syslog[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### AMQP Event Publisher #####################
+[event_publisher]
+{% if grafana_config_event_publisher is defined %}
+{% for key in grafana_config_event_publisher %}
+{{ key }} = {{ grafana_config_event_publisher[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Dashboard JSON files #####################
+[dashboards.json]
+{% if grafana_config_dashboards_json is defined %}
+{% for key in grafana_config_dashboards_json %}
+{{ key }} = {{ grafana_config_dashboards_json[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Alerting #################################
+[alerting]
+{% if grafana_config_alerting is defined %}
+{% for key in grafana_config_alerting %}
+{{ key }} = {{ grafana_config_alerting[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Internal Grafana Metrics #################
+[metrics]
+{% if grafana_config_metrics is defined %}
+{% for key in grafana_config_metrics %}
+{{ key }} = {{ grafana_config_metrics[key] }}
+{% endfor %}
+{% endif %}
+
+[metrics.graphite]
+{% if grafana_config_metrics_graphite is defined %}
+{% for key in grafana_config_metrics_graphite %}
+{{ key }} = {{ grafana_config_metrics_graphite[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### Internal Grafana Metrics #################
+[grafana_net]
+{% if grafana_config_grafana_net is defined %}
+{% for key in grafana_config_grafana_net %}
+{{ key }} = {{ grafana_config_grafana_net[key] }}
+{% endfor %}
+{% endif %}
+
+#################################### External image storage ###################
+[external_image_storage]
+{% if grafana_config_external_image_storage is defined %}
+{% for key in grafana_config_external_image_storage %}
+{{ key }} = {{ grafana_config_external_image_storage[key] }}
+{% endfor %}
+{% endif %}
+
+[external_image_storage.s3]
+{% if grafana_config_external_image_storage_s3 is defined %}
+{% for key in grafana_config_external_image_storage_s3 %}
+{{ key }} = {{ grafana_config_external_image_storage_s3[key] }}
+{% endfor %}
+{% endif %}
+
+[external_image_storage.webdav]
+{% if grafana_config_external_image_storage_webdav is defined %}
+{% for key in grafana_config_external_image_storage_webdav %}
+{{ key }} = {{ grafana_config_external_image_storage_webdav[key] }}
+{% endfor %}
+{% endif %}
